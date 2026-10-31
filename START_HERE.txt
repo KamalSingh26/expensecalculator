@@ -1,0 +1,132 @@
+PERSONAL EXPENSE CALCULATOR
+Python mini project | Beginner-friendly desktop application
+
+WHAT DOES THIS PROJECT DO?
+You enter expenses such as food, travel and shopping. The app saves each
+expense and calculates your monthly spending and remaining budget.
+
+Example:
+Monthly budget: Rs 5,000
+Food: Rs 1,200 | Transport: Rs 500 | Shopping: Rs 800
+Total spent: Rs 2,500
+Remaining budget: Rs 2,500
+
+WHAT YOU NEED
+- A computer with Python 3.9 or newer and Tkinter.
+- The normal Windows Python installer includes the Tcl/Tk option; keep it
+  selected. No pip packages, MySQL server or internet connection are required
+  to run this app after Python is installed.
+- This is a desktop app. It does not run as a window inside an online notebook.
+
+HOW TO RUN ON WINDOWS
+1. Download the ZIP file.
+2. Right-click it and choose Extract All. Do not run it from inside the ZIP.
+3. Open the extracted Expense_Calculator folder. You should see
+   expense_calculator.py and this START_HERE.txt file.
+4. Click the address bar at the top of File Explorer, type cmd and press Enter.
+5. In the Command Prompt window, type:
+
+   python expense_calculator.py
+
+6. Press Enter. The Expense Calculator window opens.
+
+If Windows says "python is not recognized", try:
+
+   py expense_calculator.py
+
+If neither command works, install Python 3 with the Tcl/Tk option and the
+"Add Python to PATH" option, then close and reopen Command Prompt.
+
+FIRST DEMONSTRATION
+1. Leave the month as the current month, for example 2026-10.
+2. Enter 5000 in Monthly budget and click Save budget.
+3. In the form on the left, select Food and enter 150.50 as the amount.
+4. Add a note such as Lunch and click + Add expense.
+5. The table, total spent, category totals and remaining budget update.
+6. Add another expense under Transport to see both category totals.
+7. Close and reopen the app. The saved expenses and budget remain.
+
+FEATURES
+- Add an expense with a date, category, amount and optional note.
+- View expenses for a chosen month using YYYY-MM and Show month.
+- Set a separate budget for each month; save 0 to clear that month's budget.
+- Calculate total spending, category totals and remaining budget.
+- Display an Over Budget amount when spending exceeds the monthly budget.
+- Delete a selected expense after confirmation.
+- Export the displayed month to CSV.
+- Save automatically in an SQLite database.
+- Reject invalid dates, zero/negative expenses and more than two decimals.
+
+USEFUL DETAILS
+- All amounts are in Indian rupees (Rs).
+- Use 250.50 for an amount. Do not type commas or a currency symbol.
+- Dates use YYYY-MM-DD. Notes can contain up to 140 characters.
+- Adding an expense automatically shows the month of that expense.
+- You can record past or future dates. No sample expenses are preloaded.
+- To correct an expense, delete it and add the correct entry.
+- The budget is your spending limit, rather than your bank account balance.
+
+PROJECT FILES
+expense_calculator.py       Application, calculations, validation and database.
+test_expense_calculator.py  Automated tests; not needed to start the app.
+START_HERE.txt             These instructions and a short project explanation.
+
+The app creates expenses.db beside the Python file on the first run. Keep
+that file to retain your data. To back up the data, close the app and copy
+expenses.db to another folder. A CSV export contains expenses for one month;
+it does not include your saved budgets and cannot be imported by this app.
+
+HOW THE PROJECT WORKS
+1. Tkinter creates the window and reads your entries.
+2. Python checks the date, category and amount.
+3. SQLite stores the expense in expenses.db.
+4. Python loads the chosen month's expenses and adds their amounts.
+5. The window shows the updated table and totals.
+
+Calculation:
+Total spent = sum of all expense amounts in the chosen month
+Remaining budget = monthly budget - total spent
+Category total = sum of expenses belonging to one category in that month
+
+Money is stored as whole paise: Rs 125.50 becomes 12550. This avoids
+floating-point errors such as 0.1 + 0.2 not being exactly 0.3.
+
+DATABASE TABLES
+expenses: id, spent_on, category, amount_paise, note
+budgets: month, amount_paise
+
+PYTHON CONCEPTS YOU CAN EXPLAIN
+- Variables and input validation.
+- Functions: parse_amount, validate_date and calculate_summary.
+- Conditions: checking whether spending is over budget.
+- Loops and dictionaries: calculating category totals.
+- Classes: ExpenseStore manages data; ExpenseCalculator manages the window.
+- Exception handling: displaying helpful messages for invalid input.
+- SQL: creating tables, inserting, selecting, updating and deleting records.
+- File handling: exporting a CSV file.
+- Event handling: running a function when a button is clicked.
+
+OPTIONAL: RUN THE AUTOMATED TESTS
+From the same folder, run:
+
+   python -m unittest -v
+
+The tests check exact money calculations, input validation, month boundaries,
+budgets, deletion, saved-data persistence and CSV export. They do not launch
+the graphical window.
+
+COMMON PROBLEMS
+- No module named tkinter: your Python installation lacks Tkinter. On
+  Windows, modify the Python installation and enable Tcl/Tk and IDLE.
+- Can't open file: check that Command Prompt is in the folder containing
+  expense_calculator.py, not the outer download folder.
+- Empty table: select the month in which you added the expenses and click
+  Show month. A new database starts with no expenses.
+- Could not open database: extract the project to a writable folder such
+  as Documents before running it.
+- Linux: install the Tkinter package supplied for your Python version if
+  it is missing, then run python3 expense_calculator.py in a desktop session.
+
+POSSIBLE FUTURE IMPROVEMENTS
+Edit an expense directly, import CSV files, show spending charts, or add
+recurring expenses. The current project deliberately keeps the core small.
